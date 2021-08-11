@@ -56,14 +56,12 @@ public class UDPServer {
 
             // write pieces of file
             for (int i = 0; i < (fileInfo.getPiecesOfFile() - 1); i++) {
-                receivePacket = new DatagramPacket(receiveData, receiveData.length,
-                        inetAddress, port);
+                receivePacket = new DatagramPacket(receiveData, receiveData.length, inetAddress, port);
                 serverSocket.receive(receivePacket);
                 bos.write(receiveData, 0, PIECES_OF_FILE_SIZE);
             }
             // write last bytes of file
-            receivePacket = new DatagramPacket(receiveData, receiveData.length,
-                    inetAddress, port);
+            receivePacket = new DatagramPacket(receiveData, receiveData.length, inetAddress, port);
             serverSocket.receive(receivePacket);
             bos.write(receiveData, 0, fileInfo.getLastByteLength());
             bos.flush();
