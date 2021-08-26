@@ -1,117 +1,60 @@
 package client;
 
-import usb.FileInfo;
-
-import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
-public class TCPClient {
-    private Socket client;
-    private final String serverHost = "localhost";
-    private final int serverPort = 9900;
+import net.TLVPackage;
+import net.TLV;
+
+public class TCPClient implements Runnable {
+    private TLV tlv = null;
+    Socket s = null;
 
     public static void main(String[] args) {
-        TCPClient tcpClient = new TCPClient();
-        tcpClient.initializeTCPClient();
-    }
-
-    public void initializeTCPClient(){
-        String sourceFilePath = "Events.log";
-        String destinationDir = "server\\";
-        connectServer();
-        sendFile(sourceFilePath, destinationDir);
-        closeSocket(client);
-    }
-
-    public void connectServer() {
         try {
-            client = new Socket(serverHost, serverPort);
-            System.out.println("connected to server");
-        } catch (IOException e) {
+            TCPClient c = new TCPClient();
+            Thread t = new Thread(c.new ShutdownHook(), "ShutdownHook-Thread");
+            Runtime.getRuntime().addShutdownHook(t);
+
+            Socket s = new Socket("127.0.0.1", 9900);
+
+            c.tlv = new TLV(s);
+            new Thread(c).start();
+            c.tlv.sendFile("Events.log");
+//            for (int i = 0; i < 10; i++) {
+//                String str = i + "_" + "Test!!!";
+//                c.tlv.writeMsg(str, 200);
+//                Thread.sleep(1000);
+//            }
+//
+//            c.tlv.writeMsg("Done", 201);
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
-    public void sendFile(String sourceFilePath, String destinationDir) {
-        DataOutputStream outToServer = null;
-        ObjectOutputStream oos = null;
-        ObjectInputStream ois = null;
-
-        try {
-            // make greeting
-            outToServer = new DataOutputStream(client.getOutputStream());
-            outToServer.writeUTF("Hello from " + client.getLocalSocketAddress());
-
-            // get file info
-            FileInfo fileInfo = getFileInfo(sourceFilePath, destinationDir);
-
-            // send file
-            oos = new ObjectOutputStream(client.getOutputStream());
-            oos.writeObject(fileInfo);
-
-            // get confirmation
-            ois = new ObjectInputStream(client.getInputStream());
-            fileInfo = (FileInfo) ois.readObject();
-            if (fileInfo != null) {
-                System.out.println(fileInfo.getStatus());
-            }
-        } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-        } finally {
-            closeStream(oos);
-            closeStream(ois);
-            closeStream(outToServer);
+    @Override
+    public void run() {
+        TLVPackage msg = null;
+        while (true) {
+            msg = tlv.readMsg();
+            System.out.println("Read a msg:" + (new String(msg.getValue())));
         }
+
     }
 
-    private FileInfo getFileInfo(String sourceFilePath, String destinationDir) {
-        FileInfo fileInfo = null;
-        BufferedInputStream bis = null;
-        try {
-            File sourceFile = new File(sourceFilePath);
-            bis = new BufferedInputStream(new FileInputStream(sourceFile));
-            fileInfo = new FileInfo();
-            byte[] fileBytes = new byte[(int) sourceFile.length()];
-            // get file info
-            bis.read(fileBytes, 0, fileBytes.length);
-            fileInfo.setFilename(sourceFile.getName());
-            fileInfo.setDataBytes(fileBytes);
-            fileInfo.setDestinationDirectory(destinationDir);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            closeStream(bis);
-        }
-        return fileInfo;
-    }
-
-    public void closeSocket(Socket socket) {
-        try {
-            if (socket != null) {
-                socket.close();
+    class ShutdownHook implements Runnable {// Safe exit method
+        @Override
+        public void run() {
+            System.out.println("ShutdownHook execute start...");
+            try {
+                tlv.close();
+                TimeUnit.SECONDS.sleep (10); // Simulate the processing operation before the application process exits
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void closeStream(InputStream inputStream) {
-        try {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void closeStream(OutputStream outputStream) {
-        try {
-            if (outputStream != null) {
-                outputStream.close();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("ShutdownHook execute end...");
         }
     }
 }

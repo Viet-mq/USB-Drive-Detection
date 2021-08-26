@@ -1,276 +1,56 @@
-Aug 05, 2021 5:13:45 PM usb.LogWriter writeLog
+Aug 26, 2021 11:11:27 AM usb.LogWriter writeLog
+INFO: USB D detected
+Aug 26, 2021 11:11:27 AM usb.LogWriter writeLog
+INFO: Total space: 299998 MB
+Aug 26, 2021 11:11:27 AM usb.LogWriter writeLog
+INFO: Free space: 157063 MB
+Aug 26, 2021 11:11:27 AM usb.LogWriter writeLog
+INFO: Number of files: 4
+Aug 26, 2021 11:11:27 AM usb.LogWriter writeLog
+INFO: Number of folders: 19
+Aug 26, 2021 11:11:27 AM usb.LogWriter writeLog
+INFO: Plugin time: 2021-08-26 11:11:27
+Aug 26, 2021 11:11:28 AM usb.LogWriter writeLog
+INFO: Copy total 1 images, capacity: 0 MB
+Aug 26, 2021 11:12:02 AM usb.LogWriter writeLog
 INFO: USB E detected
-Aug 05, 2021 5:13:45 PM usb.LogWriter writeLog
+Aug 26, 2021 11:12:02 AM usb.LogWriter writeLog
 INFO: Total space: 3822 MB
-Aug 05, 2021 5:13:45 PM usb.LogWriter writeLog
-INFO: Free space: 3500 MB
-Aug 05, 2021 5:13:45 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 05, 2021 5:13:45 PM usb.LogWriter writeLog
-INFO: Number of folders: 8
-Aug 05, 2021 5:13:45 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-05 17:13:45
-Aug 05, 2021 5:14:58 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 3:13:08 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 3:13:08 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 3:13:08 PM usb.LogWriter writeLog
-INFO: Free space: 3500 MB
-Aug 10, 2021 3:13:08 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 3:13:08 PM usb.LogWriter writeLog
-INFO: Number of folders: 8
-Aug 10, 2021 3:13:08 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 15:13:08
-Aug 10, 2021 3:14:25 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 3:44:12 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 3:44:12 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 3:44:12 PM usb.LogWriter writeLog
-INFO: Free space: 3500 MB
-Aug 10, 2021 3:44:12 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 3:44:12 PM usb.LogWriter writeLog
-INFO: Number of folders: 8
-Aug 10, 2021 3:44:12 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 15:44:12
-Aug 10, 2021 3:45:28 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 4:11:59 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 4:11:59 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 4:11:59 PM usb.LogWriter writeLog
-INFO: Free space: 3500 MB
-Aug 10, 2021 4:11:59 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 4:11:59 PM usb.LogWriter writeLog
-INFO: Number of folders: 8
-Aug 10, 2021 4:11:59 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 16:11:59
-Aug 10, 2021 4:13:12 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 4:17:39 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 4:17:39 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 4:17:39 PM usb.LogWriter writeLog
-INFO: Free space: 3500 MB
-Aug 10, 2021 4:17:39 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 4:17:39 PM usb.LogWriter writeLog
-INFO: Number of folders: 8
-Aug 10, 2021 4:17:39 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 16:17:39
-Aug 10, 2021 4:22:58 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 4:22:58 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 4:22:58 PM usb.LogWriter writeLog
-INFO: Free space: 3500 MB
-Aug 10, 2021 4:22:58 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 4:22:58 PM usb.LogWriter writeLog
-INFO: Number of folders: 8
-Aug 10, 2021 4:22:58 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 16:22:58
-Aug 10, 2021 4:24:10 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 4:33:30 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 4:33:30 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 4:33:30 PM usb.LogWriter writeLog
-INFO: Free space: 3594 MB
-Aug 10, 2021 4:33:30 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 4:33:30 PM usb.LogWriter writeLog
-INFO: Number of folders: 1
-Aug 10, 2021 4:33:30 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 16:33:30
-Aug 10, 2021 4:36:03 PM usb.LogWriter writeLog
-INFO: Copy total 309 images, capacity: 209 MB
-Aug 10, 2021 4:40:42 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 4:40:42 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 4:40:42 PM usb.LogWriter writeLog
+Aug 26, 2021 11:12:02 AM usb.LogWriter writeLog
 INFO: Free space: 3568 MB
-Aug 10, 2021 4:40:42 PM usb.LogWriter writeLog
+Aug 26, 2021 11:12:02 AM usb.LogWriter writeLog
 INFO: Number of files: 309
-Aug 10, 2021 4:40:42 PM usb.LogWriter writeLog
+Aug 26, 2021 11:12:03 AM usb.LogWriter writeLog
 INFO: Number of folders: 7
-Aug 10, 2021 4:40:42 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 16:40:42
-Aug 10, 2021 4:41:55 PM usb.LogWriter writeLog
+Aug 26, 2021 11:12:03 AM usb.LogWriter writeLog
+INFO: Plugin time: 2021-08-26 11:12:03
+Aug 26, 2021 11:12:46 AM usb.LogWriter writeLog
 INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 4:43:17 PM usb.LogWriter writeLog
+Aug 26, 2021 2:25:26 PM usb.LogWriter writeLog
 INFO: USB E detected
-Aug 10, 2021 4:43:17 PM usb.LogWriter writeLog
+Aug 26, 2021 2:25:26 PM usb.LogWriter writeLog
 INFO: Total space: 3822 MB
-Aug 10, 2021 4:43:17 PM usb.LogWriter writeLog
+Aug 26, 2021 2:25:26 PM usb.LogWriter writeLog
 INFO: Free space: 3568 MB
-Aug 10, 2021 4:43:17 PM usb.LogWriter writeLog
+Aug 26, 2021 2:25:26 PM usb.LogWriter writeLog
 INFO: Number of files: 309
-Aug 10, 2021 4:43:17 PM usb.LogWriter writeLog
+Aug 26, 2021 2:25:26 PM usb.LogWriter writeLog
 INFO: Number of folders: 7
-Aug 10, 2021 4:43:17 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 16:43:17
-Aug 10, 2021 4:44:31 PM usb.LogWriter writeLog
+Aug 26, 2021 2:25:26 PM usb.LogWriter writeLog
+INFO: Plugin time: 2021-08-26 14:25:26
+Aug 26, 2021 2:26:08 PM usb.LogWriter writeLog
 INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 5:15:50 PM usb.LogWriter writeLog
+Aug 26, 2021 5:23:05 PM usb.LogWriter writeLog
 INFO: USB E detected
-Aug 10, 2021 5:15:50 PM usb.LogWriter writeLog
+Aug 26, 2021 5:23:05 PM usb.LogWriter writeLog
 INFO: Total space: 3822 MB
-Aug 10, 2021 5:15:50 PM usb.LogWriter writeLog
+Aug 26, 2021 5:23:05 PM usb.LogWriter writeLog
 INFO: Free space: 3568 MB
-Aug 10, 2021 5:15:50 PM usb.LogWriter writeLog
+Aug 26, 2021 5:23:05 PM usb.LogWriter writeLog
 INFO: Number of files: 309
-Aug 10, 2021 5:15:50 PM usb.LogWriter writeLog
+Aug 26, 2021 5:23:05 PM usb.LogWriter writeLog
 INFO: Number of folders: 7
-Aug 10, 2021 5:15:50 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 17:15:50
-Aug 10, 2021 5:16:26 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 5:21:22 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 5:21:22 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 5:21:22 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 10, 2021 5:21:22 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 5:21:22 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 10, 2021 5:21:22 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 17:21:22
-Aug 10, 2021 5:21:59 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 5:23:42 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 5:23:42 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 5:23:42 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 10, 2021 5:23:42 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 5:23:42 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 10, 2021 5:23:42 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 17:23:42
-Aug 10, 2021 5:24:05 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 5:24:25 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 5:24:25 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 5:24:25 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 10, 2021 5:24:25 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 5:24:25 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 10, 2021 5:24:25 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 17:24:25
-Aug 10, 2021 5:25:38 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 10, 2021 5:26:10 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 10, 2021 5:26:10 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 10, 2021 5:26:10 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 10, 2021 5:26:10 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 10, 2021 5:26:10 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 10, 2021 5:26:10 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-10 17:26:10
-Aug 10, 2021 5:26:47 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 11, 2021 4:30:56 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 11, 2021 4:30:56 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 11, 2021 4:30:56 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 11, 2021 4:30:56 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 11, 2021 4:30:56 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 11, 2021 4:30:56 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-11 16:30:56
-Aug 11, 2021 4:31:43 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 11, 2021 4:40:21 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 11, 2021 4:40:21 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 11, 2021 4:40:21 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 11, 2021 4:40:21 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 11, 2021 4:40:21 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 11, 2021 4:40:21 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-11 16:40:21
-Aug 11, 2021 4:40:56 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 11, 2021 4:40:56 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 11, 2021 4:40:56 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 11, 2021 4:40:56 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 11, 2021 4:40:56 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 11, 2021 4:40:56 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-11 16:40:56
-Aug 11, 2021 4:41:33 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 11, 2021 4:44:34 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 11, 2021 4:44:34 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 11, 2021 4:44:34 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 11, 2021 4:44:34 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 11, 2021 4:44:34 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 11, 2021 4:44:34 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-11 16:44:34
-Aug 11, 2021 4:45:12 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 11, 2021 4:57:19 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 11, 2021 4:57:19 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 11, 2021 4:57:19 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 11, 2021 4:57:19 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 11, 2021 4:57:19 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 11, 2021 4:57:19 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-11 16:57:19
-Aug 11, 2021 4:57:57 PM usb.LogWriter writeLog
-INFO: Copy total 132 images, capacity: 100 MB
-Aug 11, 2021 5:29:25 PM usb.LogWriter writeLog
-INFO: USB E detected
-Aug 11, 2021 5:29:25 PM usb.LogWriter writeLog
-INFO: Total space: 3822 MB
-Aug 11, 2021 5:29:25 PM usb.LogWriter writeLog
-INFO: Free space: 3568 MB
-Aug 11, 2021 5:29:25 PM usb.LogWriter writeLog
-INFO: Number of files: 309
-Aug 11, 2021 5:29:25 PM usb.LogWriter writeLog
-INFO: Number of folders: 7
-Aug 11, 2021 5:29:25 PM usb.LogWriter writeLog
-INFO: Plugin time: 2021-08-11 17:29:25
-Aug 11, 2021 5:30:02 PM usb.LogWriter writeLog
+Aug 26, 2021 5:23:05 PM usb.LogWriter writeLog
+INFO: Plugin time: 2021-08-26 17:23:05
+Aug 26, 2021 5:23:45 PM usb.LogWriter writeLog
 INFO: Copy total 132 images, capacity: 100 MB

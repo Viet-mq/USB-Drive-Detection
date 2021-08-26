@@ -29,7 +29,7 @@ public class UsbManager {
     };
 
     public void detectDevice(File[] usb, String[] driveName, boolean[] usbDetected) {
-        //while (true) {
+        while (true) {
             for (int i = 0; i < driveName.length; i++) {
                 boolean isDetected;
                 isDetected = usb[i].canRead();
@@ -50,7 +50,7 @@ public class UsbManager {
                     usbDetected[i] = isDetected;
                 }
             }
-        //}
+        }
     }
 
     public void runDetect() {

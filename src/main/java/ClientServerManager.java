@@ -15,7 +15,7 @@ public class ClientServerManager {
             @Override
             public void run() {
                 synchronized (this){
-                    tcpServer.openTCPServer();
+                    //tcpServer.openTCPServer();
                     udpServer.openUDPServer();
                 }
             }
@@ -26,7 +26,7 @@ public class ClientServerManager {
             @Override
             public void run() {
                 synchronized (this){
-                    tcpClient.initializeTCPClient();
+                    //tcpClient.initializeTCPClient();
                     udpClient.initializeUDPClient();
                 }
             }

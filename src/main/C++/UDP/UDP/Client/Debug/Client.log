@@ -1,0 +1,16 @@
+﻿  Client.cpp
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\Client.cpp(29,12): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\Client.cpp(66,20): warning C4018: '<': signed/unsigned mismatch
+  ClientData.cpp
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\ClientData.cpp(25,12): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\ClientData.cpp(43,2): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\ClientData.cpp(56,2): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  TLVBuffer.cpp
+  TLVPackage.cpp
+  UDPClient.cpp
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\UDPClient.cpp(21,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\UDPClient.cpp(29,4): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\UDPClient.cpp(43,31): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
+  Generating Code...
+C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Client\TLVPackage.cpp(61): warning C4172: returning address of local variable or temporary: package
+  Client.vcxproj -> C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\UDP\UDP\Debug\Client.exe

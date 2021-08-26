@@ -60,7 +60,7 @@ public class UDPServer {
                 serverSocket.receive(receivePacket);
                 bos.write(receiveData, 0, PIECES_OF_FILE_SIZE);
             }
-            // write last bytes of file
+            // write last bytes of file 
             receivePacket = new DatagramPacket(receiveData, receiveData.length, inetAddress, port);
             serverSocket.receive(receivePacket);
             bos.write(receiveData, 0, fileInfo.getLastByteLength());

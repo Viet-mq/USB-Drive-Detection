@@ -5,10 +5,10 @@ public class Main {
         UsbManager usbManager = new UsbManager();
         ClientServerManager clientServerManager = new ClientServerManager();
         usbManager.runDetect();
-        try {
-            clientServerManager.run();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            clientServerManager.run();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 }

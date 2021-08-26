@@ -1,0 +1,3 @@
+SERVER_LOCATE C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\server
+PORT 8888
+MAX_CLIENT 1024

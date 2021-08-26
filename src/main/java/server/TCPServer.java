@@ -1,120 +1,100 @@
 package server;
 
-import usb.FileInfo;
-
-import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
-public class TCPServer extends Thread {
+import net.TLVPackage;
+import net.TLV;
 
-    private ServerSocket serverSocket;
-    private final int port = 9900;
+public class TCPServer {
+    private static final int port = 9900;
+    ServerSocket serverSocket = null;
+    List <SocketClient> list = new ArrayList<>();
 
     public static void main(String[] args) {
-        TCPServer tcpServer = new TCPServer();
-        tcpServer.openTCPServer();
+        System.out.println("Server opened on port " + port);
+        new TCPServer().start();
     }
 
-    public void openTCPServer(){
-        open();
-        start();
-    }
-
-    public void open() {
+    void start() {
         try {
             serverSocket = new ServerSocket(port);
-            System.out.println("TCP server is opened on port " + port);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        try {
+            while (true) {
+                Socket s = serverSocket.accept ();
+                SocketClient sc = new SocketClient(s);
+                new Thread(sc).start();
+                list.add(sc);
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        }
+
     }
 
-    public void run() {
-        while (true) {
-            Socket server = null;
-            DataInputStream inFromClient = null;
-            ObjectInputStream ois = null;
-            ObjectOutputStream oos = null;
+    static class SocketClient implements Runnable {
+        Socket s = null;
+        TLV tlv = null;
 
+        public SocketClient(Socket s) {
+            this.s = s;
+            tlv = new TLV(s);
+        }
+
+        @Override
+        public void run() {
+            tlv.writeMsg("Ready to receive file", 200);
+            System.out.println("Sent request");
+            while (true) {
+                TLVPackage tlvPackage = tlv.readLogFile();
+                if(tlvPackage == null) break;
+                else
+                    System.out.println(tlvPackage.toString());
+            }
+
+        }
+
+        void close() {
+            tlv.close();
             try {
-                // accept connect from client and create Socket object
-                server = serverSocket.accept();
-                System.out.println("connected to " + server.getRemoteSocketAddress());
-
-                // get greeting from client
-                inFromClient = new DataInputStream(server.getInputStream());
-                System.out.println(inFromClient.readUTF());
-
-                // receive file info
-                ois = new ObjectInputStream(server.getInputStream());
-                FileInfo fileInfo = (FileInfo) ois.readObject();
-                if (fileInfo != null) {
-                    createFile(fileInfo);
+                if (s != null) {
+                    s.close();
                 }
-
-                // confirm that file is received
-                oos = new ObjectOutputStream(server.getOutputStream());
-                fileInfo.setStatus("success");
-                fileInfo.setDataBytes(null);
-                oos.writeObject(fileInfo);
-
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                closeStream(ois);
-                closeStream(oos);
-                closeStream(inFromClient);
-                closeSocket(server);
             }
         }
     }
 
-    private void createFile(FileInfo fileInfo) {
-        BufferedOutputStream bos = null;
-
+    void close() {
         try {
-            if (fileInfo != null) {
-                File fileReceive = new File(fileInfo.getDestinationDirectory() + fileInfo.getFilename());
-                bos = new BufferedOutputStream(new FileOutputStream(fileReceive));
-                // write file content
-                bos.write(fileInfo.getDataBytes());
-                bos.flush();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            closeStream(bos);
-        }
-    }
 
-    public void closeSocket(Socket socket) {
-        try {
-            if (socket != null) {
-                socket.close();
+            if (serverSocket != null) {
+                serverSocket.close();
             }
-        } catch (IOException e) {
+            for (SocketClient sc : list) {
+                sc.close();
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void closeStream(InputStream inputStream) {
-        try {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
+    class shutdownhook implements Runnable {
+        @Override
+        public void run() {
+            close();
+            System.out.println("server closed");
         }
     }
 
-    public void closeStream(OutputStream outputStream) {
-        try {
-            if (outputStream != null) {
-                outputStream.close();
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 }
+
