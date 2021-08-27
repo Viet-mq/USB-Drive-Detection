@@ -1,3 +1,3 @@
 ADDRESS 127.0.0.1
 PORT 9900
-CLIENT_LOCATE C:\Users\MAIVIET\IdeaProjects\USBDriveDetection
+CLIENT_LOCATE C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\images

@@ -2,7 +2,4 @@
 C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\TCPClient\TCPClient\TCPClient.cpp(21,3): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\TCPClient\TCPClient\TCPClient.cpp(29,4): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\TCPClient\TCPClient\TCPClient.cpp(43,31): warning C4996: 'inet_addr': Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings
-  TVLPackage.cpp
-  Generating Code...
-C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\TCPClient\TCPClient\TVLPackage.cpp(43): warning C4172: returning address of local variable or temporary: package
   TCPClient.vcxproj -> C:\Users\MAIVIET\IdeaProjects\USBDriveDetection\src\main\C++\TCPClient\Debug\TCPClient.exe
