@@ -20,7 +20,8 @@ public class TCPClient implements Runnable {
 
             c.tlv = new TLV(s);
             new Thread(c).start();
-            c.tlv.sendFile("Events.log");
+            //c.tlv.sendImagesFile("images\\5.png");
+            c.tlv.sendLogFile("Events.log");
 //            for (int i = 0; i < 10; i++) {
 //                String str = i + "_" + "Test!!!";
 //                c.tlv.writeMsg(str, 200);
@@ -32,6 +33,23 @@ public class TCPClient implements Runnable {
             e.printStackTrace();
         }
 
+    }
+
+    public void initializeTCPClient(){
+        try {
+            TCPClient c = new TCPClient();
+            Thread t = new Thread(c.new ShutdownHook(), "ShutdownHook-Thread");
+            Runtime.getRuntime().addShutdownHook(t);
+
+            Socket s = new Socket("127.0.0.1", 9900);
+
+            c.tlv = new TLV(s);
+            new Thread(c).start();
+            //c.tlv.sendImagesFile("images\\5.png");
+            c.tlv.sendLogFile("Events.log");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -1,5 +1,7 @@
 package client;
 
+import net.ImageEncryption;
+import net.TLVPackage;
 import usb.FileInfo;
 
 import java.io.*;
@@ -37,14 +39,19 @@ public class UDPClient {
         if(filePath.isDirectory()){
             for (File f : Objects.requireNonNull(filePath.listFiles())){
                 String sourcePath = "images\\" + f.getName();
-                udpClient.sendFile(sourcePath, destinationDir);
+                udpClient.sendImagesFile(sourcePath, destinationDir);
             }
+            System.out.println("=== Complete ===");
         }
     }
 
-    private void sendFile(String sourcePath, String destinationDir) {
+    private void sendImagesFile(String sourcePath, String destinationDir){
         InetAddress inetAddress;
         DatagramPacket sendPacket;
+        ImageEncryption imageEncryption = new ImageEncryption();
+        TLVPackage tlvPackage = new TLVPackage();
+
+        String imageText = imageEncryption.encoder(sourcePath);
 
         try {
             File fileSend = new File(sourcePath);
@@ -91,7 +98,10 @@ public class UDPClient {
             System.out.println("Sending file... " + fileInfo.getFilename());
             // send pieces of file
             for (int i = 0; i < (count - 1); i++) {
-                sendPacket = new DatagramPacket(fileBytess[i], PIECES_OF_FILE_SIZE, inetAddress, serverPort);
+                tlvPackage.setType(200);
+                tlvPackage.setLength(PIECES_OF_FILE_SIZE);
+                tlvPackage.setValue(fileBytess[i]);
+                sendPacket = new DatagramPacket(tlvPackage.getValue(), PIECES_OF_FILE_SIZE, inetAddress, serverPort);
                 clientSocket.send(sendPacket);
                 waitMillisecond(20);
             }

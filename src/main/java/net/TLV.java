@@ -7,12 +7,11 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 
-import static net.EncodeImages.encodeFileToBase64Binary;
-
 public class TLV {
 
     private final String LOGFILE_DESTINATION = "server/Events.log";
 
+    ImageEncryption imageEncryption = new ImageEncryption();
     DataInputStream dis = null;
     DataOutputStream dos = null;
     FileOutputStream outputStream;
@@ -37,7 +36,24 @@ public class TLV {
 
     }
 
-    public TLVPackage readLogFile(){
+    public void sendLogFile(String filePath)  {
+        BufferedReader bufferedReader;
+        try {
+            bufferedReader = new BufferedReader(new FileReader(filePath));
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                writeMsg(line + "\n", 200);
+                line = bufferedReader.readLine();
+            }
+
+            writeMsg("", 201);
+            bufferedReader.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public TLVPackage getLogFile(){
         byte[] type = new byte[4];
         byte[] length = new byte[4];
 
@@ -55,7 +71,7 @@ public class TLV {
 
                 tlvPackage.setValue(value);
                 outputStream.write(value);
-                //System.out.println(tlvPackage.toString());
+
                 if(tlvPackage.getType() == 201){
                     System.out.println("Read file successfully");
                 }
@@ -72,30 +88,46 @@ public class TLV {
         return null;
     }
 
+    public void sendImagesFile(String filePath){
+        String imageString = imageEncryption.encoder(filePath);
+        System.out.println(imageString.length());
+        writeMsg(imageString, 200);
+        writeMsg("", 201);
+    }
 
-    public void sendFile(String filePath)  {
-        BufferedReader bufferedReader;
-        try {
-            bufferedReader = new BufferedReader(new FileReader(filePath));
-            String line = bufferedReader.readLine();
-            while (line != null) {
-                writeMsg(line + "\n", 200);
-                line = bufferedReader.readLine();
+    public TLVPackage getImageFile(String fileDestination){
+
+        byte[] type = new byte[4];
+        byte[] length = new byte[4];
+
+        try{
+            TLVPackage tlvPackage = new TLVPackage();
+            dis.readFully(type);
+            tlvPackage.setType(LITTLEENDIAN(type));
+
+            if(tlvPackage.getType() == 200 || tlvPackage.getType() == 201){
+                dis.readFully(length);
+                tlvPackage.setLength(LITTLEENDIAN(length));
+
+                byte[] value = new byte[tlvPackage.getLength()];
+                dis.readFully(value);
+
+                tlvPackage.setValue(value);
+                if(tlvPackage.getType() == 201){
+                    System.out.println("Get file successfully");
+                } else
+                    imageEncryption.decoder(new String(tlvPackage.getValue()), fileDestination);
+
+                return tlvPackage;
+            } else {
+                return null;
             }
 
-            writeMsg("", 201);
-            bufferedReader.close();
         } catch (IOException e){
             e.printStackTrace();
         }
-    }
 
-    public void sendImageFile(String filePath){
-        File file = new File(filePath);
-        EncodeImages encodeImages = new EncodeImages();
-        String encodeString = encodeFileToBase64Binary(file);
-        writeMsg(encodeString, 200);
-        writeMsg("", 201);
+        return null;
     }
 
     public void writeMsg(String msg, int type) {

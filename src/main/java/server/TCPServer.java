@@ -18,7 +18,7 @@ public class TCPServer {
         new TCPServer().start();
     }
 
-    void start() {
+    public void start() {
         try {
             serverSocket = new ServerSocket(port);
         } catch (Exception e) {
@@ -53,12 +53,11 @@ public class TCPServer {
             tlv.writeMsg("Ready to receive file", 200);
             System.out.println("Sent request");
             while (true) {
-                TLVPackage tlvPackage = tlv.readLogFile();
+                TLVPackage tlvPackage = tlv.getLogFile();
                 if(tlvPackage == null) break;
                 else
-                    System.out.println(tlvPackage.toString());
+                    System.out.println(tlvPackage);
             }
-
         }
 
         void close() {

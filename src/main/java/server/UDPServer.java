@@ -35,6 +35,17 @@ public class UDPServer {
         }
     }
 
+    public void getFile(){
+        byte[] receiveData = new byte[PIECES_OF_FILE_SIZE];
+        DatagramPacket receivePacket;
+
+        try{
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void receiveFile() {
         byte[] receiveData = new byte[PIECES_OF_FILE_SIZE];
         DatagramPacket receivePacket;
@@ -58,14 +69,22 @@ public class UDPServer {
             for (int i = 0; i < (fileInfo.getPiecesOfFile() - 1); i++) {
                 receivePacket = new DatagramPacket(receiveData, receiveData.length, inetAddress, port);
                 serverSocket.receive(receivePacket);
+                if(receivePacket.getLength() < PIECES_OF_FILE_SIZE){
+                    System.out.println("Lost data");
+                    continue;
+                }
                 bos.write(receiveData, 0, PIECES_OF_FILE_SIZE);
             }
             // write last bytes of file 
             receivePacket = new DatagramPacket(receiveData, receiveData.length, inetAddress, port);
             serverSocket.receive(receivePacket);
-            bos.write(receiveData, 0, fileInfo.getLastByteLength());
-            bos.flush();
-            System.out.println("file transfer done!");
+            if (receivePacket.getLength() < fileInfo.getLastByteLength()){
+                System.out.println("Lost data");
+            } else {
+                bos.write(receiveData, 0, fileInfo.getLastByteLength());
+                bos.flush();
+            }
+            System.out.println("file " + fileInfo.getFilename() + " transfer done!");
 
             // close stream
             bos.close();
