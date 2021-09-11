@@ -7,12 +7,14 @@ import usb.FileInfo;
 import java.io.*;
 import java.net.*;
 import java.util.Objects;
+import java.util.UUID;
 
 public class UDPClient {
     private static final int PIECES_OF_FILE_SIZE = 1024 * 32;
     private DatagramSocket clientSocket;
     private final String serverHost = "localhost";
     private final int serverPort = 8888;
+    private UUID uuid = UUID.randomUUID();
 
     public static void main(String[] args) {
         UDPClient udpClient = new UDPClient();
@@ -33,7 +35,7 @@ public class UDPClient {
     }
 
     private void sendFolder(File filePath){
-        String destinationDir = "server\\";
+        String destinationDir = "server\\" + uuid + "client\\";
         UDPClient udpClient = new UDPClient();
         udpClient.connectServer();
         if(filePath.isDirectory()){
@@ -103,12 +105,12 @@ public class UDPClient {
                 tlvPackage.setValue(fileBytess[i]);
                 sendPacket = new DatagramPacket(tlvPackage.getValue(), PIECES_OF_FILE_SIZE, inetAddress, serverPort);
                 clientSocket.send(sendPacket);
-                waitMillisecond(20);
+                waitMillisecond(30);
             }
             // send last bytes of file
             sendPacket = new DatagramPacket(fileBytess[count - 1], PIECES_OF_FILE_SIZE, inetAddress, serverPort);
             clientSocket.send(sendPacket);
-            waitMillisecond(20);
+            waitMillisecond(100);
 
             // close stream
             bis.close();

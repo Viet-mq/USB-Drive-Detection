@@ -1,78 +1,90 @@
 package client;
 
-import java.net.Socket;
-import java.util.concurrent.TimeUnit;
+import net.Tlv;
 
-import net.TLVPackage;
-import net.TLV;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public class TCPClient implements Runnable {
-    private TLV tlv = null;
-    Socket s = null;
+public class TCPClient {
 
-    public static void main(String[] args) {
-        try {
-            TCPClient c = new TCPClient();
-            Thread t = new Thread(c.new ShutdownHook(), "ShutdownHook-Thread");
-            Runtime.getRuntime().addShutdownHook(t);
+    private String filePath;
+    private String host;
+    private int port;
 
-            Socket s = new Socket("127.0.0.1", 9900);
-
-            c.tlv = new TLV(s);
-            new Thread(c).start();
-            //c.tlv.sendImagesFile("images\\5.png");
-            c.tlv.sendLogFile("Events.log");
-//            for (int i = 0; i < 10; i++) {
-//                String str = i + "_" + "Test!!!";
-//                c.tlv.writeMsg(str, 200);
-//                Thread.sleep(1000);
-//            }
-//
-//            c.tlv.writeMsg("Done", 201);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    public static void main(String[] args) throws IOException {
+        TCPClient client = new TCPClient();
+        client.run();
     }
 
-    public void initializeTCPClient(){
-        try {
-            TCPClient c = new TCPClient();
-            Thread t = new Thread(c.new ShutdownHook(), "ShutdownHook-Thread");
-            Runtime.getRuntime().addShutdownHook(t);
+    TCPClient(){}
 
-            Socket s = new Socket("127.0.0.1", 9900);
-
-            c.tlv = new TLV(s);
-            new Thread(c).start();
-            //c.tlv.sendImagesFile("images\\5.png");
-            c.tlv.sendLogFile("Events.log");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void run() throws IOException {
+        TCPClient client = new TCPClient();
+        client.setHost("127.0.0.1");
+        client.setPort(9900);
+        client.setFilePath("Events.log");
+        SocketChannel socketChannel = client.CreateChannel(client.getHost(), client.getPort());
+        client.sendFile(socketChannel, client.getFilePath());
     }
 
-    @Override
-    public void run() {
-        TLVPackage msg = null;
-        while (true) {
-            msg = tlv.readMsg();
-            System.out.println("Read a msg:" + (new String(msg.getValue())));
-        }
+    private void sendFile(SocketChannel socketChannel, String filePath) throws IOException {
 
+        Path path = Paths.get(filePath);
+        FileChannel inChannel = FileChannel.open(path);
+        Tlv tlv = new Tlv();
+
+        ByteBuffer buffer = ByteBuffer.allocate(1016);
+        while (inChannel.read(buffer) > 0) {
+            buffer.flip();
+            tlv.putBytesValue(200, buffer.array());
+
+            byte[] serialized = tlv.serialize();
+            System.out.println(serialized.length);
+            socketChannel.write(ByteBuffer.wrap(serialized));
+
+            buffer.clear();
+        }
+        socketChannel.close();
     }
 
-    class ShutdownHook implements Runnable {// Safe exit method
-        @Override
-        public void run() {
-            System.out.println("ShutdownHook execute start...");
-            try {
-                tlv.close();
-                TimeUnit.SECONDS.sleep (10); // Simulate the processing operation before the application process exits
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.println("ShutdownHook execute end...");
-        }
+    private SocketChannel CreateChannel(String host, int port) throws IOException {
+
+        SocketChannel socketChannel = SocketChannel.open();
+        socketChannel.configureBlocking(true);
+
+        SocketAddress sockAddr = new InetSocketAddress(host, port);
+        socketChannel.connect(sockAddr);
+        System.out.println("Connected.. Now sending the file");
+        return socketChannel;
+    }
+
+    public String getFilePath(){
+        return filePath;
+    }
+
+    public void setFilePath(String filePath){
+        this.filePath = filePath;
+    }
+
+    public int getPort(){
+        return port;
+    }
+
+    public void setPort(int port){
+        this.port = port;
+    }
+
+    public String getHost(){
+        return host;
+    }
+
+    public void setHost(String host){
+        this.host = host;
     }
 }

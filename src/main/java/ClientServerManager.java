@@ -4,8 +4,7 @@ import server.TCPServer;
 import server.UDPServer;
 
 public class ClientServerManager {
-    private final TCPClient tcpClient = new TCPClient();
-    private final TCPServer tcpServer = new TCPServer();
+
     private final UDPClient udpClient = new UDPClient();
     private final UDPServer udpServer = new UDPServer();
 

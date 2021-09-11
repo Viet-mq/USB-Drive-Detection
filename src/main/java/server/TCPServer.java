@@ -1,99 +1,145 @@
 package server;
 
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-
-import net.TLVPackage;
-import net.TLV;
+import java.io.File;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.EnumSet;
 
 public class TCPServer {
-    private static final int port = 9900;
-    ServerSocket serverSocket = null;
-    List <SocketClient> list = new ArrayList<>();
 
-    public static void main(String[] args) {
-        System.out.println("Server opened on port " + port);
-        new TCPServer().start();
+    private static final ByteOrder DEFAULT_BYTE_ORDER = ByteOrder.LITTLE_ENDIAN;
+    private String fileDir;
+    private int port;
+
+    public static void main(String[] args) throws IOException {
+        TCPServer server = new TCPServer();
+        server.run();
     }
 
-    public void start() {
-        try {
-            serverSocket = new ServerSocket(port);
-        } catch (Exception e) {
-            e.printStackTrace();
+    TCPServer() { }
+
+    private void runWithCmd() throws IOException {
+        SocketChannel socketChannel = createServerSocketChannel(port);
+        if (!checkExistedFile(fileDir))
+            readFileFromSocketChannel(socketChannel, fileDir);
+        else {
+            System.out.println("File existed!!");
         }
-
-        try {
-            while (true) {
-                Socket s = serverSocket.accept ();
-                SocketClient sc = new SocketClient(s);
-                new Thread(sc).start();
-                list.add(sc);
-            }
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
-
     }
 
-    static class SocketClient implements Runnable {
-        Socket s = null;
-        TLV tlv = null;
+    private void run() throws IOException {
+        TCPServer server = new TCPServer();
+        server.setFileDir("server/Events.log");
+        server.setPort(9900);
+        SocketChannel socketChannel = server.createServerSocketChannel(server.getPort());
+        server.readFileFromSocketChannel(socketChannel, server.getFileDir());
+    }
 
-        public SocketClient(Socket s) {
-            this.s = s;
-            tlv = new TLV(s);
+    private void readFileFromSocketChannel(SocketChannel socketChannel, String fileDir) throws IOException {
+        Path path = Paths.get(fileDir);
+        FileChannel fileChannel = FileChannel.open(path,
+                EnumSet.of(StandardOpenOption.CREATE,
+                        StandardOpenOption.TRUNCATE_EXISTING,
+                        StandardOpenOption.WRITE)
+        );
+
+        ByteBuffer buffer = ByteBuffer.allocate(1024);
+        while (socketChannel.read(buffer) > 0) {
+            buffer.flip();
+            byte[] data = buffer.array();
+            fileChannel.write(ByteBuffer.wrap(onReceive(data, buffer)));
+            buffer.clear();
         }
 
-        @Override
-        public void run() {
-            tlv.writeMsg("Ready to receive file", 200);
-            System.out.println("Sent request");
-            while (true) {
-                TLVPackage tlvPackage = tlv.getLogFile();
-                if(tlvPackage == null) break;
-                else
-                    System.out.println(tlvPackage);
+        fileChannel.close();
+        System.out.println("Receiving file successfully!");
+        socketChannel.close();
+    }
+
+    public byte[] onReceive(byte[] data, ByteBuffer socketBuffer) {
+        int offset = 0;
+        int len;
+        while ((len = Math.min(data.length - offset, socketBuffer.remaining())) > 0) {
+            socketBuffer.put(data, offset, len);
+            offset += len;
+
+            //System.out.println("Socket position: " + socketBuffer.position());
+            //Kiem tra dieu kien
+            if (socketBuffer.position() < 8) {
+                //return de doc tiep du lieu tu socket
+                return null;
             }
-        }
 
-        void close() {
-            tlv.close();
-            try {
-                if (s != null) {
-                    s.close();
+            socketBuffer.flip();
+            //Doc message type va message length
+            int pos = 0;
+            System.out.println(socketBuffer.remaining());
+            while (socketBuffer.remaining() >= 8) {
+                socketBuffer.mark();
+                int type = ByteBuffer.wrap(socketBuffer.array(), pos, 4).order(DEFAULT_BYTE_ORDER).getInt();
+                pos += 4;
+                //System.out.println("type: " + type);
+                int length = ByteBuffer.wrap(socketBuffer.array(), pos, 4).order(DEFAULT_BYTE_ORDER).getInt();
+                pos += 4;
+                //System.out.println("length: " + length);
+                if (socketBuffer.remaining() < length) {
+                    socketBuffer.reset();
+                    //compact de pos = limit,limit = capacity
+                    socketBuffer.compact();
+                    return null;
+                } else {
+                    //doc full du lieu tu message
+                    byte[] value = new byte[length];
+                    System.arraycopy(socketBuffer.array(), pos, value, 0, length);
+                    //System.out.println(new String(value));
+                    return value;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
+
+            socketBuffer.compact();
         }
+
+        return null;
     }
 
-    void close() {
-        try {
+    private SocketChannel createServerSocketChannel(int port) throws IOException {
+        ServerSocketChannel serverSocket;
+        SocketChannel client;
+        serverSocket = ServerSocketChannel.open();
+        serverSocket.socket().bind(new InetSocketAddress(port));
+        client = serverSocket.accept();
 
-            if (serverSocket != null) {
-                serverSocket.close();
-            }
-            for (SocketClient sc : list) {
-                sc.close();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.println("connection established .." + client.getRemoteAddress());
+        return client;
     }
 
-    class shutdownhook implements Runnable {
-        @Override
-        public void run() {
-            close();
-            System.out.println("server closed");
-        }
+    private boolean checkExistedFile(String fileDir) {
+        File tmpDir = new File(fileDir);
+        return tmpDir.exists();
+    }
+
+    public String getFileDir() {
+        return fileDir;
+    }
+
+    public void setFileDir(String fileDir) {
+        this.fileDir = fileDir;
+    }
+
+    public int getPort() {
+        return port;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
     }
 
 }
-

@@ -2,9 +2,9 @@ package net;
 
 public class TLVPackage {
 
-    int type = 0;
-    int length = 0;
-    byte[] value = null;
+    private int type;
+    private int length;
+    private byte[] value;
 
     public TLVPackage(){
 

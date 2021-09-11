@@ -35,17 +35,6 @@ public class UDPServer {
         }
     }
 
-    public void getFile(){
-        byte[] receiveData = new byte[PIECES_OF_FILE_SIZE];
-        DatagramPacket receivePacket;
-
-        try{
-
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
     public void receiveFile() {
         byte[] receiveData = new byte[PIECES_OF_FILE_SIZE];
         DatagramPacket receivePacket;
@@ -61,6 +50,7 @@ public class UDPServer {
 
             // get file content
             //System.out.println("Receiving file...");
+            new File(fileInfo.getDestinationDirectory()).mkdirs();
             File fileReceive = new File(Objects.requireNonNull(fileInfo).getDestinationDirectory()
                     + fileInfo.getFilename());
             BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(fileReceive));
